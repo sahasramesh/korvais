@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/rajeshwari/static/css/main.65fcbd12.css",
+    "main.js": "/rajeshwari/static/js/main.8c05c567.js",
+    "static/js/787.f86c479c.chunk.js": "/rajeshwari/static/js/787.f86c479c.chunk.js",
+    "index.html": "/rajeshwari/index.html",
+    "main.65fcbd12.css.map": "/rajeshwari/static/css/main.65fcbd12.css.map",
+    "main.8c05c567.js.map": "/rajeshwari/static/js/main.8c05c567.js.map",
+    "787.f86c479c.chunk.js.map": "/rajeshwari/static/js/787.f86c479c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.65fcbd12.css",
+    "static/js/main.8c05c567.js"
+  ]
+}
