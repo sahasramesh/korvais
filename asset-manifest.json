@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/rajeshwari/static/css/main.80624fd5.css",
-    "main.js": "/rajeshwari/static/js/main.55f83b5c.js",
-    "static/js/787.f86c479c.chunk.js": "/rajeshwari/static/js/787.f86c479c.chunk.js",
-    "index.html": "/rajeshwari/index.html",
-    "main.80624fd5.css.map": "/rajeshwari/static/css/main.80624fd5.css.map",
-    "main.55f83b5c.js.map": "/rajeshwari/static/js/main.55f83b5c.js.map",
-    "787.f86c479c.chunk.js.map": "/rajeshwari/static/js/787.f86c479c.chunk.js.map"
+    "main.css": "/korvais/static/css/main.a961b75d.css",
+    "main.js": "/korvais/static/js/main.4592191f.js",
+    "static/js/787.f86c479c.chunk.js": "/korvais/static/js/787.f86c479c.chunk.js",
+    "index.html": "/korvais/index.html",
+    "main.a961b75d.css.map": "/korvais/static/css/main.a961b75d.css.map",
+    "main.4592191f.js.map": "/korvais/static/js/main.4592191f.js.map",
+    "787.f86c479c.chunk.js.map": "/korvais/static/js/787.f86c479c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.80624fd5.css",
-    "static/js/main.55f83b5c.js"
+    "static/css/main.a961b75d.css",
+    "static/js/main.4592191f.js"
   ]
 }
