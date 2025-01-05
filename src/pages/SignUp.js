@@ -1,6 +1,6 @@
-// src/components/SignIn.js
+// src/components/SignUp.js
 import React, { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import Button from '@mui/joy/Button';
 import Input from '@mui/joy/Input';
@@ -8,18 +8,27 @@ import Typography from '@mui/joy/Typography';
 import Card from '@mui/joy/Card';
 import Divider from '@mui/joy/Divider';
 import Link from '@mui/joy/Link';
+import { useNavigate } from 'react-router-dom';
 
-export default function SignIn({ switchToSignUp }) {
+export default function SignUp({ switchToSignIn }) {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, email, password);
+      navigate('/');
     } catch (err) {
-      setError('Invalid email or password');
+      setError(err.message);
     }
   };
 
@@ -27,7 +36,7 @@ export default function SignIn({ switchToSignUp }) {
     <div className="min-h-screen flex items-center justify-center bg-slate-100">
       <Card className="w-full max-w-md p-8">
         <Typography level="h2" className="text-center mb-6">
-          Welcome back
+          Create an account
         </Typography>
         
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -47,6 +56,14 @@ export default function SignIn({ switchToSignUp }) {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          <Input
+            size="lg"
+            placeholder="Confirm Password"
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
           
           {error && (
             <Typography color="danger" className="text-center">
@@ -60,20 +77,20 @@ export default function SignIn({ switchToSignUp }) {
             fullWidth
             color="primary"
           >
-            Sign In
+            Sign Up
           </Button>
         </form>
 
         <Divider sx={{ my: 4 }}>or</Divider>
         
         <Typography className="text-center">
-          Don't have an account?{' '}
+          Already have an account?{' '}
           <Link
             component="button"
-            onClick={switchToSignUp}
+            onClick={() => navigate('/signin')}
             fontWeight="lg"
           >
-            Sign up
+            Sign in
           </Link>
         </Typography>
       </Card>

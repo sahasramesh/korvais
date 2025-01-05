@@ -1,7 +1,7 @@
 // src/components/Auth.js
 import React, { useState } from 'react';
-import SignIn from './SignIn';
-import SignUp from './SignUp';
+import SignIn from '../pages/SignIn';
+import SignUp from '../pages/SignUp';
 
 export default function Auth() {
   const [isSignIn, setIsSignIn] = useState(true);
