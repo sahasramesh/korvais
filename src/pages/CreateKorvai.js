@@ -83,7 +83,7 @@ export default function CreateKorvai() {
           >
             <Option value="adi">Adi</Option>
             <Option value="khanda chapu">Khanda Chapu</Option>
-            <Option value="misra">Misra</Option>
+            <Option value="misra">Misra Chapu</Option>
             <Option value="rupakam">Rupakam</Option>
           </Select>
 
