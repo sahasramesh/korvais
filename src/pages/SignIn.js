@@ -42,10 +42,6 @@ export default function SignIn({ switchToSignUp }) {
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-100">
       <Card className="w-full max-w-md p-8">
-        <Typography level="h2" className="text-center mb-6">
-          Welcome back
-        </Typography>
-        
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
             size="lg"
@@ -80,7 +76,7 @@ export default function SignIn({ switchToSignUp }) {
           >
             Continue with Google
           </Button>
-          
+
           <Button
             type="submit"
             size="lg"

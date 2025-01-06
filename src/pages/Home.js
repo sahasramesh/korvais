@@ -15,6 +15,7 @@ import Button from '@mui/joy/Button';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import AddIcon from '@mui/icons-material/Add';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -72,8 +73,16 @@ export default function Home() {
     { user ? (
       <div className="bg-slate-300">
         <div className="flex justify-between items-center p-4">
-          <div className='text-4xl font-viet font-bold'>Korvais Collection</div>
-          {user && (
+          <div className='text-2xl font-viet font-bold'>korvais.com</div>
+          <div className="flex gap-4">
+            <Button
+              variant="soft"
+              color="primary"
+              startDecorator={<AddIcon />}
+              onClick={() => navigate('/create')}
+            >
+              New Korvai
+            </Button>
             <Button
               variant="soft"
               color="neutral"
@@ -82,7 +91,7 @@ export default function Home() {
             >
               Sign Out
             </Button>
-          )}
+          </div>
         </div>
         <div className="flex justify-center">
           <div className="m-4 bg-zinc-50 rounded-3xl drop-shadow-lg">

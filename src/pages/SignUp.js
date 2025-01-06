@@ -35,10 +35,6 @@ export default function SignUp({ switchToSignIn }) {
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-100">
       <Card className="w-full max-w-md p-8">
-        <Typography level="h2" className="text-center mb-6">
-          Create an account
-        </Typography>
-        
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
             size="lg"
