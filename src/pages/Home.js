@@ -33,9 +33,12 @@ export default function Home() {
         const korvaisData = querySnapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data(),
-          createdAt: doc.data().createdAt?.toDate() // Convert Firestore timestamp to Date
+          createdAt: doc.data().createdAt?.toDate()
         }));
         setKorvais(korvaisData);
+        for (let korvai of korvaisData) {
+          console.log(korvai);
+        }
         setLoading(false);
       } catch (err) {
         console.error("Error fetching korvais: ", err);
@@ -94,6 +97,8 @@ export default function Home() {
           talam={korvai.talam}
           ragam={korvai.ragam}
           description={korvai.description}
+          authorName={korvai.authorName}
+          createdAt={korvai.createdAt}
         />
       ))}
     </div>

@@ -21,7 +21,7 @@ const ProtectedRoute = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div></div>;
 
   if (!user) return <Navigate to="/signin" />;
 

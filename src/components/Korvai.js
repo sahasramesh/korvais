@@ -3,17 +3,24 @@ import { CssVarsProvider, extendTheme } from "@mui/joy/styles";
 import Chip from '@mui/joy/Chip';
 import Divider from '@mui/joy/Divider';
 import Icon from '@mdi/react';
-// import { mdiAccountCircle } from '@mdi/js';
+import { mdiAccountCircle } from '@mdi/js';
 import { mdiHandClap } from '@mdi/js';
-import { mdiAccountVoice } from '@mdi/js';
+import { mdiMusic } from '@mdi/js';
 
-const Korvai = ({ letters, talam, ragam, description }) => {
+const Korvai = ({ letters, talam, ragam, description, authorName, createdAt }) => {
   const talamMap = new Map([
     ['adi', 16],
     ['khanda chapu', 10],
     ['misra', 14],
     ['rupakam', 12]
   ]);
+
+  const formatDate = (date) => {
+    const month = (1 + date.getMonth()).toString();
+    const day = date.getDate().toString();
+    const year = date.getFullYear().toString().slice(-2);
+    return `${month}-${day}-${year}`;
+  };
 
   const chunkArray = (array, size) => {
 		const chunkedArray = [];
@@ -27,9 +34,9 @@ const Korvai = ({ letters, talam, ragam, description }) => {
 	};
 
   const customTheme = extendTheme({
-    fontFamily: {
-      body: 'Be Vietnam Pro',
-    },
+    // fontFamily: {
+    //   body: 'Be Vietnam Pro',
+    // },
   });
 
   return (
@@ -37,21 +44,21 @@ const Korvai = ({ letters, talam, ragam, description }) => {
       <div className="flex justify-center">
         <div className="m-4 bg-zinc-50 rounded-3xl w-3/4 drop-shadow-lg">
           <div className="p-6">
-            {/* <div className="flex justify-between items-center pb-1">
+            <div className="flex justify-between items-center pb-1">
               <div className="flex">
                 <Icon path={mdiAccountCircle} size={1} />
-                <div className="font-viet px-2">sahasr</div>
+                <div className="font-semibold px-2">{authorName}</div>
               </div>
-              <div className="font-viet">date</div>
-            </div> */}
+              <div className="text-slate-400">{createdAt && formatDate(createdAt)}</div>
+            </div>
               <Chip color="neutral" variant="outlined" startDecorator={<Icon path={mdiHandClap} size={0.7} />} sx={() => ({mx: '2px'})}>
                 {talam.replace(/\b\w/g, match => match.toUpperCase())}
               </Chip>
-              <Chip color="neutral" variant="outlined" startDecorator={<Icon path={mdiAccountVoice} size={0.7} />} sx={() => ({mx: '2px'})}>
+              <Chip color="neutral" variant="outlined" startDecorator={<Icon path={mdiMusic} size={0.7} />} sx={() => ({mx: '2px'})}>
                 {ragam.replace(/\b\w/g, match => match.toUpperCase())}
               </Chip>
             </div>
-            <div className="mx-6 font-viet">
+            <div className="mx-6">
               {description}
             </div>
             <Divider sx={{m: 3}}/>

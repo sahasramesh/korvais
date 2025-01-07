@@ -56,12 +56,14 @@ export default function CreateKorvai() {
       return;
     }
     try {
+      const emailUsername = auth.currentUser.email.split('@')[0]; 
       await addDoc(collection(db, 'korvais'), {
         letters,
         talam,
         ragam,
         description,
         userId: auth.currentUser.uid,
+        authorName: emailUsername,
         createdAt: new Date(),
       });
       navigate('/');
