@@ -11,6 +11,7 @@ import Card from '@mui/joy/Card';
 import Autocomplete from '@mui/joy/Autocomplete';
 import Alert from '@mui/joy/Alert';
 import { ragas } from '../data/ragas';
+import { useToast } from '../context/ToastContext';
 
 export default function CreateKorvai() {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ export default function CreateKorvai() {
   const [description, setDescription] = useState('');
   const [error, setError] = useState('');
   const [isValid, setIsValid] = useState(true);
+  const { showToast } = useToast();
 
   const talamMap = new Map([
     ['adi', 16],
@@ -66,9 +68,10 @@ export default function CreateKorvai() {
         authorName: emailUsername,
         createdAt: new Date(),
       });
+      showToast('Korvai posted', 'success');
       navigate('/');
     } catch (err) {
-      setError('Failed to create korvai');
+      showToast('Failed to create korvai', 'danger');
       console.error(err);
     }
   };
@@ -118,7 +121,7 @@ export default function CreateKorvai() {
 
           {!isValid && (
             <Alert color="danger">
-              Invalid characters
+              Invalid characters in korvai
             </Alert>
           )}
 

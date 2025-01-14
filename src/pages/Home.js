@@ -9,16 +9,19 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { signOut } from 'firebase/auth';
 import Korvai from '../components/Korvai';
 import CircularProgress from '@mui/joy/CircularProgress';
+import { useToast } from '../context/ToastContext';
 
 export default function Home() {
   const navigate = useNavigate();
   const [korvais, setKorvais] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { showToast } = useToast();
 
   const handleSignOut = async () => {
     try {
       await signOut(auth);
+      showToast('Signed out', 'success');
       navigate('/signin');
     } catch (error) {
       console.error("Error signing out: ", error);
