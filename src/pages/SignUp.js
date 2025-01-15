@@ -26,7 +26,7 @@ export default function SignUp({ switchToSignIn }) {
     }
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      navigate('/');
+      navigate('/feed');
     } catch (err) {
       setError(err.message);
     }

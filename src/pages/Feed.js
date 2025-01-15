@@ -1,4 +1,4 @@
-// src/pages/Home.js
+// src/pages/Feed.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { collection, query, orderBy, getDocs } from 'firebase/firestore';
@@ -11,14 +11,17 @@ import { signOut } from 'firebase/auth';
 import Korvai from '../components/Korvai';
 import CircularProgress from '@mui/joy/CircularProgress';
 import { useToast } from '../context/ToastContext';
+import { useAuth } from '../context/AuthContext';
 import Menu from '@mui/joy/Menu';
 import MenuButton from '@mui/joy/MenuButton';
 import MenuItem from '@mui/joy/MenuItem';
 import Dropdown from '@mui/joy/Dropdown';
 import { mdiMenu } from '@mdi/js';
 
-export default function Home() {
+export default function Feed() {
   const navigate = useNavigate();
+  const { user } = useAuth();
+
   const [korvais, setKorvais] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -80,30 +83,42 @@ export default function Home() {
       <div className="flex justify-between items-center p-4">
         <div className='text-2xl font-viet font-bold'>korvais.com</div>
         <div className="flex gap-4">
-          <Button
-            variant="soft"
-            color="primary"
-            startDecorator={<AddIcon />}
-            onClick={() => navigate('/create')}
-          >
-            New Korvai
-          </Button>
-          <Dropdown>
-            <MenuButton
+        {user ? (
+            <>
+              <Button
+                variant="soft"
+                color="primary"
+                startDecorator={<AddIcon />}
+                onClick={() => navigate('/create')}
+              >
+                New Korvai
+              </Button>
+              <Dropdown>
+                <MenuButton
+                  variant="soft"
+                  color="neutral"
+                >
+                  <Icon path={mdiMenu} size={1} />
+                </MenuButton>
+                <Menu>
+                  <MenuItem onClick={() => navigate('/profile')}>
+                    Profile
+                  </MenuItem>
+                  <MenuItem onClick={handleSignOut}>
+                    Sign Out
+                  </MenuItem>
+                </Menu>
+              </Dropdown>
+            </>
+          ) : (
+            <Button
               variant="soft"
-              color="neutral"
+              color="primary"
+              onClick={() => navigate('/signin')}
             >
-              <Icon path={mdiMenu} size={1} />
-            </MenuButton>
-            <Menu>
-              <MenuItem onClick={() => navigate('/profile')}>
-                Profile
-              </MenuItem>
-              <MenuItem onClick={handleSignOut}>
-                Sign Out
-              </MenuItem>
-            </Menu>
-          </Dropdown>
+              Sign In
+            </Button>
+          )}
         </div>
       </div>
 

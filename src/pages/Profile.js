@@ -57,13 +57,13 @@ export default function Profile() {
 
   return (
     <div className="bg-slate-300 min-h-screen">
-      <div className="p-8">
-        <Typography level="h2" className="text-center mb-6">
+      <div className="pt-8">
+        <Typography level="h3" className="text-center mb-6">
           Your Korvais
         </Typography>
         
         <div className="flex justify-center my-4">
-          <Typography level="h4">
+          <Typography level="h5">
             {korvais.length} Korvai{korvais.length !== 1 && 's'}
           </Typography>
         </div>

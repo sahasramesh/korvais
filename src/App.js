@@ -5,8 +5,9 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
-import Home from './pages/Home';
 import Profile from './pages/Profile';
+import Landing from './pages/Landing';
+import Feed from './pages/Feed';
 import CreateKorvai from './pages/CreateKorvai';
 import { ToastProvider } from './context/ToastContext';
 
@@ -34,34 +35,28 @@ export default function App() {
   return (
     <ToastProvider>
       <BrowserRouter>
-        <Routes>
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route
-            path="/create"
-            element={
-              <ProtectedRoute>
-                <CreateKorvai />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/feed" element={<Feed />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/create"
+          element={
+            <ProtectedRoute>
+              <CreateKorvai />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
       </BrowserRouter>
     </ToastProvider>
   );

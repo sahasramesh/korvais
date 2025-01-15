@@ -69,7 +69,7 @@ export default function CreateKorvai() {
         createdAt: new Date(),
       });
       showToast('Korvai posted', 'success');
-      navigate('/');
+      navigate('/feed');
     } catch (err) {
       showToast('Failed to create korvai', 'danger');
       console.error(err);
@@ -178,7 +178,7 @@ export default function CreateKorvai() {
               variant="soft"
               color="neutral"
               fullWidth
-              onClick={() => navigate('/')}
+              onClick={() => navigate('/feed')}
             >
               Cancel
             </Button>

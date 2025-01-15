@@ -22,7 +22,7 @@ export default function SignIn({ switchToSignUp }) {
   const handleGoogleSignIn = async () => {
     try {
       await signInWithGoogle();
-      navigate('/');
+      navigate('/feed');
     } catch (error) {
       console.error(error);
     }
