@@ -6,6 +6,7 @@ import { auth } from './firebase';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Home from './pages/Home';
+import Profile from './pages/Profile';
 import CreateKorvai from './pages/CreateKorvai';
 import { ToastProvider } from './context/ToastContext';
 
@@ -49,6 +50,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
               </ProtectedRoute>
             }
           />

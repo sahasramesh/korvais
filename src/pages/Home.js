@@ -4,12 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import { collection, query, orderBy, getDocs } from 'firebase/firestore';
 import { db, auth } from '../firebase';
 import Button from '@mui/joy/Button';
+import Icon from '@mdi/react';
 import AddIcon from '@mui/icons-material/Add';
-import LogoutIcon from '@mui/icons-material/Logout';
+// import LogoutIcon from '@mui/icons-material/Logout';
 import { signOut } from 'firebase/auth';
 import Korvai from '../components/Korvai';
 import CircularProgress from '@mui/joy/CircularProgress';
 import { useToast } from '../context/ToastContext';
+import Menu from '@mui/joy/Menu';
+import MenuButton from '@mui/joy/MenuButton';
+import MenuItem from '@mui/joy/MenuItem';
+import Dropdown from '@mui/joy/Dropdown';
+import { mdiMenu } from '@mdi/js';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -82,14 +88,22 @@ export default function Home() {
           >
             New Korvai
           </Button>
-          <Button
-            variant="soft"
-            color="neutral"
-            startDecorator={<LogoutIcon />}
-            onClick={handleSignOut}
-          >
-            Sign Out
-          </Button>
+          <Dropdown>
+            <MenuButton
+              variant="soft"
+              color="neutral"
+            >
+              <Icon path={mdiMenu} size={1} />
+            </MenuButton>
+            <Menu>
+              <MenuItem onClick={() => navigate('/profile')}>
+                Profile
+              </MenuItem>
+              <MenuItem onClick={handleSignOut}>
+                Sign Out
+              </MenuItem>
+            </Menu>
+          </Dropdown>
         </div>
       </div>
 
