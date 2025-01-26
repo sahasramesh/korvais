@@ -5,18 +5,23 @@ import { auth, db } from '../firebase';
 import Korvai from '../components/Korvai';
 import Typography from '@mui/joy/Typography';
 import CircularProgress from '@mui/joy/CircularProgress';
+import { useParams } from 'react-router-dom';
 
 export default function Profile() {
+  const { userId } = useParams();
   const [korvais, setKorvais] = useState([]);
+  const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const isOwnProfile = userId === auth.currentUser?.uid;
 
   useEffect(() => {
-    const fetchUserKorvais = async () => {
+    const fetchUserData = async () => {
       try {
+        // Fetch user's korvais
         const q = query(
           collection(db, 'korvais'),
-          where('userId', '==', auth.currentUser.uid),
+          where('userId', '==', userId),
           orderBy('createdAt', 'desc')
         );
         
@@ -28,16 +33,24 @@ export default function Profile() {
         }));
         
         setKorvais(korvaisData);
+
+        // If it's another user's profile, fetch their basic info
+        if (!isOwnProfile && korvaisData.length > 0) {
+          setUserData({
+            authorName: korvaisData[0].authorName
+          });
+        }
+        
         setLoading(false);
       } catch (err) {
-        console.error("Error fetching korvais: ", err);
-        setError("Failed to load your korvais");
+        console.error("Error fetching data: ", err);
+        setError("Failed to load profile");
         setLoading(false);
       }
     };
 
-    fetchUserKorvais();
-  }, []);
+    fetchUserData();
+  }, [userId, isOwnProfile]);
 
   if (loading) {
     return (
@@ -57,14 +70,14 @@ export default function Profile() {
 
   return (
     <div className="bg-slate-300 min-h-screen">
-      <div className="pt-8">
+      <div className="p-8">
         <Typography level="h3" className="text-center mb-6">
-          Your Korvais
+          {isOwnProfile ? 'Your korvais' : `${userData?.authorName}'s korvais`}
         </Typography>
         
-        <div className="flex justify-center my-4">
+        <div className="flex justify-center my-2">
           <Typography level="h5">
-            {korvais.length} Korvai{korvais.length !== 1 && 's'}
+            {korvais.length} korvai{korvais.length !== 1 && 's'}
           </Typography>
         </div>
 
@@ -76,6 +89,7 @@ export default function Profile() {
             ragam={korvai.ragam}
             description={korvai.description}
             authorName={korvai.authorName}
+            userId={korvai.userId}
             createdAt={korvai.createdAt}
           />
         ))}

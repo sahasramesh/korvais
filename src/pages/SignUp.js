@@ -9,6 +9,8 @@ import Card from '@mui/joy/Card';
 import Divider from '@mui/joy/Divider';
 import Link from '@mui/joy/Link';
 import { useNavigate } from 'react-router-dom';
+import { signInWithGoogle } from '../firebase';
+import GoogleIcon from '@mui/icons-material/Google';
 
 export default function SignUp({ switchToSignIn }) {
   const navigate = useNavigate();
@@ -17,6 +19,15 @@ export default function SignUp({ switchToSignIn }) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      navigate('/feed');
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,6 +72,17 @@ export default function SignUp({ switchToSignIn }) {
             required
           />
           
+          <Button
+            fullWidth
+            size="lg"
+            variant="soft"
+            color="neutral"
+            startDecorator={<GoogleIcon />}
+            onClick={handleGoogleSignIn}
+          >
+            Continue with Google
+          </Button>
+
           {error && (
             <Typography color="danger" className="text-center">
               {error}

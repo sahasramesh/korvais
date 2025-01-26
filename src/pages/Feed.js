@@ -81,17 +81,16 @@ export default function Feed() {
   return (
     <div className="bg-slate-300 min-h-screen">
       <div className="flex justify-between items-center p-4">
-        <div className='text-2xl font-viet font-bold'>korvais.com</div>
+        <div className='text-2xl font-viet'>korvais.com</div>
         <div className="flex gap-4">
         {user ? (
             <>
               <Button
                 variant="soft"
                 color="primary"
-                startDecorator={<AddIcon />}
                 onClick={() => navigate('/create')}
               >
-                New Korvai
+                <AddIcon />
               </Button>
               <Dropdown>
                 <MenuButton
@@ -130,6 +129,7 @@ export default function Feed() {
           ragam={korvai.ragam}
           description={korvai.description}
           authorName={korvai.authorName}
+          userId={korvai.userId}
           createdAt={korvai.createdAt}
         />
       ))}

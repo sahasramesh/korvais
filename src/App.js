@@ -40,14 +40,7 @@ export default function App() {
         <Route path="/feed" element={<Feed />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/profile/:userId" element={<Profile />} />
         <Route
           path="/create"
           element={

@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CssVarsProvider, extendTheme } from "@mui/joy/styles";
 import Chip from '@mui/joy/Chip';
 import Button from '@mui/joy/Button';
@@ -8,7 +9,8 @@ import { mdiAccountCircle } from '@mdi/js';
 import { mdiHandClap } from '@mdi/js';
 import { mdiMusic } from '@mdi/js';
 
-const Korvai = ({ letters, talam, ragam, description, authorName, createdAt }) => {
+const Korvai = ({ letters, talam, ragam, description, authorName, userId, createdAt }) => {
+  const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
 
   const talamMap = new Map([
@@ -46,12 +48,17 @@ const Korvai = ({ letters, talam, ragam, description, authorName, createdAt }) =
   return (
     <CssVarsProvider theme={customTheme}>
       <div className="flex justify-center">
-        <div className="m-4 bg-zinc-50 rounded-3xl w-3/4 drop-shadow-lg">
+        <div className="my-4 bg-zinc-50 rounded-3xl md:w-3/4 w-11/12 drop-shadow-lg">
           <div className="p-6">
             <div className="flex justify-between items-center pb-1">
               <div className="flex">
                 <Icon path={mdiAccountCircle} size={1} />
-                <div className="font-semibold px-2">{authorName}</div>
+                <div 
+                  className="font-semibold px-2 hover:underline cursor-pointer"
+                  onClick={() => navigate(`/profile/${userId}`)}
+                >
+                  {authorName}
+                </div>
               </div>
               <div className="text-slate-400">{createdAt && formatDate(createdAt)}</div>
             </div>
