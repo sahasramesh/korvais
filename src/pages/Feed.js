@@ -100,7 +100,7 @@ export default function Feed() {
                   <Icon path={mdiMenu} size={1} />
                 </MenuButton>
                 <Menu>
-                  <MenuItem onClick={() => navigate('/profile')}>
+                  <MenuItem onClick={() => navigate(`/profile/${auth.currentUser.uid}`)}>
                     Profile
                   </MenuItem>
                   <MenuItem onClick={handleSignOut}>
